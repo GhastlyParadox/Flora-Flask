@@ -1,4 +1,4 @@
-# HerbFlask
+# FloraFlask
 
 Michigan Flora backend, includes Flora REST API to interact with the MI Flora and Specimen database.
 

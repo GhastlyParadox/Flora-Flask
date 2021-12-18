@@ -4,7 +4,7 @@ Michigan Flora backend, includes Flora REST API to interact with the MI Flora an
 
 ### Setup ###
 
-* [Full Install/Integration Guide](https://docs.google.com/document/d/1p4lBaYQCF9Z6s2T9dtoVux1KuPlIZxOR0TTdBZREXvQ/edit#): Describes how to set up and run the full stack locally, as well as deployment to the server.
+* [Full Install/Integration Guide](): Describes how to set up and run the full stack locally, as well as deployment to the server.
 
 ### Installation:
 
@@ -22,7 +22,7 @@ Michigan Flora backend, includes Flora REST API to interact with the MI Flora an
     ``pip3 install -r requirements.text`` or ```python3 -m pip install -r requirements.txt```
     
 4. Create an [instance folder](https://flask.palletsprojects.com/en/1.1.x/config/#instance-folders) within the 
-root directory, and place [authConfig.py](https://drive.google.com/drive/u/0/folders/1Y98R1AqNs84PJ6DFfjpBtrtMciezgpKB) in there. The user database will be created/stored there as well.
+root directory, and place [authConfig.py]() in there. The user database will be created/stored there as well.
 
 5. Put the credential file (something like mif_bet_cred.p) in the application folder. This file can be created
 with write_credentials in core.py and contains a pickled version of the username and password
@@ -34,7 +34,7 @@ for non-admin access to the database.
     one for local/development, the other for production/server. Be sure the correct one 
     is set for the environment.
  *  For authentication in a local environment, there's an additional line in
-    [__init__.py](https://gitlab.umich.edu/lsa-ts-rsp/herbflask/blob/master/__init__.py):
+    [__init__.py]():
         `os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = "1"`
     *Remove this line when deploying to the server.*
  * Note that once the code has been deployed to the server (currently miflora-beta.lsait.lsa.umich.edu), 

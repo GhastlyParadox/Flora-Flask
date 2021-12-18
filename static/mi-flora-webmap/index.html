@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="css/reset.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+    <!--script>
+        var dojoConfig = {
+            has: {
+                "esri-featurelayer-webgl": 1
+            }
+        };
+    </script-->
+    <script src="https://js.arcgis.com/4.19/"></script>
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/index_layout.css" rel="stylesheet">
+    <script src="js/index.js"></script>
+    <title>Michigan Flora</title>
+</head>
+<body>
+<header><h1>Michigan Flora Web Map</h1></header>
+<!--div id="anonymousPanel" style="display: block; padding: 5px; text-align: center;">
+    <span id="sign-in" class="action">Sign In</span> to see this map.
+</div-->
+<div id="personalizedPanel" style="display: none; padding: 5px; text-align: center;">
+    Welcome <span id="userId" style="font-weight: bold;"></span> &nbsp;-&nbsp;
+    <span id="sign-out" class="action">Sign Out</span>
+</div>
+<div class="grid-container" id="page-grid">
+    <div class="grid-item" id="search-section">
+        <form action="" method="get" id="search-form">
+            <div class="form-row action responsive-section-label" id="search-section-label" onclick="showSearch()">
+                Show Search Options
+            </div>
+            <div id="search-tools" class="search-grid">
+                <div class="form-row search-top-row">
+                    <label for="common-name">Common Name:</label>
+                    <input type="text" name="common-name" id="common-name">
+                </div>
+                <div class="form-row">
+                    <label for="sci-name">Scientific Name:</label>
+                    <input type="text" name="sci-name" id="sci-name">
+                </div>
+                <div class="form-row">
+                    <label for="genus">Genus:</label>
+                    <input type="text" name="genus" id="genus">
+                </div>
+                <div class="form-row">
+                    <label for="family">Family:</label>
+                    <input type="text" name="family" id="family">
+                </div>
+                <!--div class="form-row">
+                    <label for="native-adv">Native/Adventive:</label>
+                    <select size=1 name="native-adv" id="native-adv">
+                        <option value=""></option>
+                        <option value="A">Adventive</option>
+                        <option value="N">Native</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="c">C</label>
+                    <select size=1 name="c" id="c">
+                        <option value=""></option>
+                        <option value="10">10</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                        <option value="*">*</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="wetness">W/Wetness:</label>
+                    <select multiple size=5 name="wetness" id="wetness">
+                        <option value=""></option>
+                        <option value="UPL">&#160;5 UPL</option>
+                        <option value="FACU-">&#160;4 FACU-</option>
+                        <option value="FACU">&#160;3 FACU</option>
+                        <option value="FACU+">&#160;2 FACU+</option>
+                        <option value="FAC-">&#160;1 FAC-</option>
+                        <option value="FAC">&#160;0 FAC</option>
+                        <option value="FAC+">-1 FAC+</option>
+                        <option value="FACW-">-2 FACW-</option>
+                        <option value="FACW">-3 FACW</option>
+                        <option value="FACW+">-4 FACW+</option>
+                        <option value="OBL">-5 OBL</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="phys">Physiognomy:</label>
+                    <select multiple size=5 name="phys" id="phys">
+                        <option value = ""></option>
+                        <option value="Ad Fern">Ad Fern</option>
+                        <option value="Ad A-Forb">Ad A-Forb</option>
+                        <option value="Ad B-Forb">Ad B-Forb</option>
+                        <option value="Ad P-Forb">Ad P-Forb</option>
+                        <option value="Ad A-Grass">Ad A-Grass</option>
+                        <option value="Ad P-Grass">Ad P-Grass</option>
+                        <option value="Ad A-Sedge">Ad A-Sedge</option>
+                        <option value="Ad P-Sedge">Ad P-Sedge</option>
+                        <option value="Ad Shrub">Ad Shrub</option>
+                        <option value="Ad Tree">Ad Tree</option>
+                        <option value="Ad A-Vine">Ad A-Vine</option>
+                        <option value="Ad P-Vine">Ad P-Vine</option>
+                        <option value="Ad W-Vine">Ad W-Vine</option>
+                        <option value="Nt Fern">Nt Fern</option>
+                        <option value="Nt Fern Al">Nt Fern Al</option>
+                        <option value="Nt A-Forb">Nt A-Forb</option>
+                        <option value="Nt B-Forb">Nt B-Forb</option>
+                        <option value="Nt P-Forb">Nt P-Forb</option>
+                        <option value="Nt A-Grass">Nt A-Grass</option>
+                        <option value="Nt P-Grass">Nt P-Grass</option>
+                        <option value="Nt A-Sedge">Nt A-Sedge</option>
+                        <option value="Nt P-Sedge">Nt P-Sedge</option>
+                        <option value="Nt Shrub">Nt Shrub</option>
+                        <option value="Nt Tree">Nt Tree</option>
+                        <option value="Nt A-Vine">Nt A-Vine</option>
+                        <option value="Nt B-Vine">Nt B-Vine</option>
+                        <option value="Nt P-Vine">Nt P-Vine</option>
+                        <option value="Nt W-Vine">Nt W-Vine</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="state-stat">State Status:</label>
+                    <select multiple size=5 name="state-stat" id="state-stat">
+                        <option value=""></option>
+                        <option value="X">Extirpated</option>
+                        <option value="E">Endangered</option>
+                        <option value="T">Threatened</option>
+                        <option value="SC">Special Concern</option>
+                    </select>
+                </div-->
+                <div class="form-row">
+                    <label for="collector-name">Collector's Name:</label>
+                    <input type="text" name="collector-name" id="collector-name">
+                </div>
+                <div class="form-row">
+                    <label for="collector-num">Collector's Number:</label>
+                    <input type="text" name="collector-num" id="collector-num">
+                </div>
+                <div class="form-row">
+                    <label for="collection-year">Collection Year:</label>
+                    <input type="text" name="collection-year" id="collection-year">
+                </div>
+                <div class="form-row">
+                    <label for="location">Location:</label>
+                    <input type="text" name="location" id="location">
+                </div>
+                <div class="form-row">
+                    <label for="county">County:</label>
+                    <select multiple size=5 name="county" id="county">
+                        <option value=""></option>
+                        <option value="Alcona County">Alcona County</option>
+                        <option value="Alger County">Alger County</option>
+                        <option value="Allegan County">Allegan County</option>
+                        <option value="Alpena County">Alpena County</option>
+                        <option value="Antrim County">Antrim County</option>
+                        <option value="Arenac County">Arenac County</option>
+                        <option value="Baraga County">Baraga County</option>
+                        <option value="Barry County">Barry County</option>
+                        <option value="Bay County">Bay County</option>
+                        <option value="Benzie County">Benzie County</option>
+                        <option value="Berrien County">Berrien County</option>
+                        <option value="Branch County">Branch County</option>
+                        <option value="Calhoun County">Calhoun County</option>
+                        <option value="Cass County">Cass County</option>
+                        <option value="Charlevoix County">Charlevoix County</option>
+                        <option value="Cheboygan County">Cheboygan County</option>
+                        <option value="Chippewa County">Chippewa County</option>
+                        <option value="Clare County">Clare County</option>
+                        <option value="Clinton County">Clinton County</option>
+                        <option value="Crawford County">Crawford County</option>
+                        <option value="Delta County">Delta County</option>
+                        <option value="Dickinson County">Dickinson County</option>
+                        <option value="Eaton County">Eaton County</option>
+                        <option value="Emmet County">Emmet County</option>
+                        <option value="Genesee County">Genesee County</option>
+                        <option value="Gladwin County">Gladwin County</option>
+                        <option value="Gogebic County">Gogebic County</option>
+                        <option value="Gratiot County">Gratiot County</option>
+                        <option value="Hillsdale County">Hillsdale County</option>
+                        <option value="Houghton County">Houghton County</option>
+                        <option value="Huron County">Huron County</option>
+                        <option value="Ingham County">Ingham County</option>
+                        <option value="Ionia County">Ionia County</option>
+                        <option value="Iosco County">Iosco County</option>
+                        <option value="Iron County">Iron County</option>
+                        <option value="Isabella County">Isabella County</option>
+                        <option value="Jackson County">Jackson County</option>
+                        <option value="Kalamazoo County">Kalamazoo County</option>
+                        <option value="Kalkaska County">Kalkaska County</option>
+                        <option value="Kent County">Kent County</option>
+                        <option value="Keweenaw County">Keweenaw County</option>
+                        <option value="Lake County">Lake County</option>
+                        <option value="Lapeer County">Lapeer County</option>
+                        <option value="Leelanau County">Leelanau County</option>
+                        <option value="Lenawee County">Lenawee County</option>
+                        <option value="Livingston County">Livingston County</option>
+                        <option value="Luce County">Luce County</option>
+                        <option value="Mackinac County">Mackinac County</option>
+                        <option value="Macomb County">Macomb County</option>
+                        <option value="Manistee County">Manistee County</option>
+                        <option value="Marquette County">Marquette County</option>
+                        <option value="Mason County">Mason County</option>
+                        <option value="Mecosta County">Mecosta County</option>
+                        <option value="Menominee County">Menominee County</option>
+                        <option value="Midland County">Midland County</option>
+                        <option value="Missaukee County">Missaukee County</option>
+                        <option value="Monroe County">Monroe County</option>
+                        <option value="Montcalm County">Montcalm County</option>
+                        <option value="Montmorency County">Montmorency County</option>
+                        <option value="Muskegon County">Muskegon County</option>
+                        <option value="Newaygo County">Newaygo County</option>
+                        <option value="Oakland County">Oakland County</option>
+                        <option value="Oceana County">Oceana County</option>
+                        <option value="Ogemaw County">Ogemaw County</option>
+                        <option value="Ontonagon County">Ontonagon County</option>
+                        <option value="Osceola County">Osceola County</option>
+                        <option value="Oscoda County">Oscoda County</option>
+                        <option value="Otsego County">Otsego County</option>
+                        <option value="Ottawa County">Ottawa County</option>
+                        <option value="Presque Isle County">Presque Isle County</option>
+                        <option value="Roscommon County">Roscommon County</option>
+                        <option value="Saginaw County">Saginaw County</option>
+                        <option value="Sanilac County">Sanilac County</option>
+                        <option value="Schoolcraft County">Schoolcraft County</option>
+                        <option value="Shiawassee County">Shiawassee County</option>
+                        <option value="St. Clair County">St. Clair County</option>
+                        <option value="St. Joseph County">St. Joseph County</option>
+                        <option value="Tuscola County">Tuscola County</option>
+                        <option value="Van Buren County">Van Buren County</option>
+                        <option value="Washtenaw County">Washtenaw County</option>
+                        <option value="Wayne County">Wayne County</option>
+                        <option value="Wexford County">Wexford County</option>
+                        <!--Copied from MiFlora site html-->
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="exact-match">Match inputs exactly?</label>
+                    <input type="checkbox" id="exact-match">
+                </div>
+                <div class="form-row">
+                    <input type="button" class="button" onclick="doSearch();" value="Search">
+                </div>
+                <div class="form-row">
+                    <input type="button" class="button" onclick="clearSearch();" id="clear-search" value="Clear Search Fields">
+                </div>
+                <div class="form-row">
+                    <input type="button" class="button" onclick="showHints();" id="show-hints" value="Show Search Hints">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="grid-item" id="map-section">
+        <!-- The map goes here -->
+    </div>
+    <div class="grid-item " id="results-section">
+        <div class="form-row action responsive-section-label" id="results-section-label" onclick="showResults()">
+            Show Results Table
+        </div>
+        <div id="results-contents" class="results-flex">
+            <div id="result-count" class="results-item">
+                Loading specimens...
+            </div>
+            <div id="result-header" class="title-row action results-item">
+            </div>
+            <div id="results-table-div" class="results-item">
+                <table id="result-table">
+                    <thead>
+                    </thead>
+                    <tbody id="result-rows">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="grid-item">University of Michigan Herbarium | 3600 Varsity Drive | Ann Arbor, MI 48108-2228 |
+        <a href="mailto:eeb-michiganfloraonline@umich.edu">eeb-michiganfloraonline@umich.edu</a> | phone 734.615.6200 |fax
+        734.998.0038
+    </footer>
+</div>
+<!-- The Modal -->
+<div id="search-hints" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" onclick="hideHints()">&times;</span>
+        <h1 class="tips-header">Search Tips</h1>
+        <div id="hints">
+            <ul>
+                <li>To select multiple criteria for a category use Shift for a continuous range or Control (Ctrl key) for individual items on Windows computers. For Mac, hold down the command button to select multiple options.</li>
+                <li>Synonyms linking to the three volume Michigan Flora are included in the Scientific Name searches (but not the Genus searches), so entering the genus “Panicum” in the Scientific Name search field will also return species in the genus “Dichanthelium”</li>
+                <li>A “%” can be used as a wildcard, so “Mu%gia” entered in the Genus field will return all the species in “Muhlenbergia”; “Cat%tail” entered in the Common Name field will return all species of “cat-tails”, which is useful when you’re unsure if the name is hyphenated or two words</li>
+                <li>Some searches, such as Scientific Name or Collector, can be conducted on partial entries, so entering “bia cor” in the Scientific Name search field will return “Euphorbia corollata”; “Haz” entered in the Collector field will return collections of “A.S. Hazzard” and “Brian T. Hazlett”</li>
+                <li>For the collection search, to select decades in the year field, use %, so 186%, will return all the collections from the decade of the 1860’s</li>
+                <li>You can search by day if you place dates in the format: 05/27/1950 or month using a wildcard i.e., 05/%/1950</li>
+                <li>Checking the box for exact matching will force exact matches on the common name, scientific name, family, and genus fields. This will prevent a search for 'Carex arcta', for example, from also returning results for 'Carex arctata'.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

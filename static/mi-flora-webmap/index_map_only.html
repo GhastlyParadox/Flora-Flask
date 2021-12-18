@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="css/reset.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+    <!--script>
+        var dojoConfig = {
+            has: {
+                "esri-featurelayer-webgl": 1
+            }
+        };
+    </script-->
+    <script src="https://js.arcgis.com/4.19/"></script>
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/index_layout_map_only.css" rel="stylesheet">
+    <script src="js/index_map_only.js"></script>
+    <title>Michigan Flora</title>
+</head>
+<body>
+<header><h1>Michigan Flora Web Map</h1></header>
+<!--div id="anonymousPanel" style="display: block; padding: 5px; text-align: center;">
+    <span id="sign-in" class="action">Sign In</span> to see this map.
+</div-->
+<div id="personalizedPanel" style="display: none; padding: 5px; text-align: center;">
+    Welcome <span id="userId" style="font-weight: bold;"></span> &nbsp;-&nbsp;
+    <span id="sign-out" class="action">Sign Out</span>
+</div>
+<div class="grid-container" id="page-grid">
+    <div class="grid-item" id="map-section">
+        <!-- The map goes here -->
+    </div>
+</div>
+</body>
+</html>

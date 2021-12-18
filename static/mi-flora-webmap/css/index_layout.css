@@ -1,0 +1,114 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 4vh 87vh 4vh 5vh;
+    justify-items: stretch;
+    align-items: stretch;
+}
+#search-section {
+    grid-row: 1;
+}
+#search-tools {
+    display: none;
+}
+#results-contents {
+    display: none;
+}
+#result-count {
+    display: none;
+}
+
+#map-section {
+    grid-row: 2;
+}
+#results-section {
+    grid-row: 3;
+    overflow: hidden;
+    min-height: 50px;
+}
+.results-flex {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    grid-area: content;
+    min-height: 0;
+    min-width: 0;
+    max-height: 100%;
+    overflow-y: hidden;
+}
+
+#result-table {
+    width: 100%;
+    height: calc( 43vh - 6em );
+    overflow: auto;
+}
+#results-table-div {
+    flex: 1;
+    overflow: scroll;
+}
+
+#result-table tbody {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+
+
+footer {
+    grid-row: 4;
+    font-size: x-small;
+}
+
+@media screen and (min-width: 700px) {
+    /* for bigger screens, put the search bar on the left */
+
+    .grid-container {
+        height: 100vh;
+        max-height: 100vh;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 70vh 26vh 4vh;
+    }
+    #search-section {
+        grid-column: 1;
+        grid-row: 1/span 2;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        min-width: 300px;
+    }
+    #map-section {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    #search-tools {
+        display: grid;
+    }
+    #results-contents{
+        display:grid;
+    }
+    #results-section {
+        grid-column: 2;
+        grid-row:2;
+    }
+    #result-table {
+        height: calc( 26vh - 4em );
+    }
+    footer {
+        grid-column: 1/span 2;
+        grid-row: 3;
+        font-size: small;
+    }
+    .responsive-section-label {
+        display: none;
+    }
+}
+.grid-item {
+}
+
+#result-table {
+    display: block;
+}
+#result-table,
+#result-rows {
+    border-collapse: collapse;
+}

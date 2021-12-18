@@ -1,0 +1,10 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 100vh;
+    justify-items: stretch;
+    align-items: stretch;
+}
+#map-section {
+    grid-row: 1;
+}
